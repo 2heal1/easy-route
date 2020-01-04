@@ -1,10 +1,9 @@
 const prettier = require("prettier");
 function createRoute(meta) {
-    if (!meta)
-        return 'null';
+    if (!meta) return 'null';
     const routeName = `name: '${meta.name}'`;
-    const metaRoutes = meta.routeMeta ? `,meta:${JSON.stringify(meta.routeMeta, null, 2)}` : '';
-    const child = meta.children ? `,children:${JSON.stringify(meta.children.map(createRoute), null, 2).replace(/\\n/g, '').replace(/\\"/g, '').replace(/"/g, '')}` : '';
+    const metaRoutes = meta.routeMeta ? `,meta: ${JSON.stringify(meta.routeMeta, null,0)}` : '';
+    const child = meta.children ? `,children:${JSON.stringify(meta.children.map(createRoute), null, 2).replace(/\\n/g, '').replace(/\\/g, '').replace(/"null"/g,null).replace(/" /g,'').replace(/}"/g,'}')}` : '';
     if (meta instanceof Array) {
         return 'null';
     }
@@ -12,9 +11,7 @@ function createRoute(meta) {
     {
         ${routeName},
         path:'${meta.isParent ? '/' : ''}${meta.path}',
-        component:${meta.specifier}
-        ${metaRoutes}
-        ${child}
+        component:${meta.specifier}${metaRoutes}${child}
     }`;
 }
 function createImport(meta, dynamic, chunkNamePrefix) {
