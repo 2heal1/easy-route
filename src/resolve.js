@@ -36,8 +36,9 @@ function resolveMeta(pagePaths, importPrefix, hasParent, layoutPath, layoutChild
                 meta.routeMeta = JSON.parse(routeMetaBlock.content);
             }
             catch (err) {
-                throw new Error(`Invalid json format of <route-meta> content in ${layout.path.join('/')}\n` +
-                    err.message);
+                const wrapErr = new Error('Invalid json format of <route-meta> content about ' + err.message);
+                wrapErr.file = layout.path
+                throw wrapErr
             }
         }
         let curArr = pagePaths.filter(item => {
@@ -81,8 +82,9 @@ function resolveMeta(pagePaths, importPrefix, hasParent, layoutPath, layoutChild
                         meta.routeMeta = JSON.parse(routeMetaBlock.content);
                     }
                     catch (err) {
-                        throw new Error(`Invalid json format of <route-meta> content in ${item.path.join('/')}\n` +
-                            err.message);
+                        const wrapErr = new Error('Invalid json format of <route-meta> content about ' + err.message);
+                        wrapErr.file = item.path
+                        throw wrapErr
                     }
                 }
                 return meta;
