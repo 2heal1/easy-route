@@ -15,7 +15,6 @@ function resolveMeta(pagePaths, importPrefix, hasParent, layoutPath, layoutChild
         }
         // 获取文件名
         let filePath = basename(layout.path);
-        // console.log(lastParentLevel +' ' +layout.path)
         noLayoutPath = parentSplit.length >= 2 ? noLayoutPath : filePath;
         let pathArray = filePath.split('/');
         if (hasRoute(getLastName(pathArray)))
