@@ -1,0 +1,1 @@
+你可以在[VUE-CLI-PLUGIN-EASY-ROUTING](https://github.com/2heal1/vue-cli-plugin-easy-routing)查看如何使用
